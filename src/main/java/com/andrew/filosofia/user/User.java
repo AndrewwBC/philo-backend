@@ -2,6 +2,7 @@ package com.andrew.filosofia.user;
 
 import com.andrew.filosofia.post.Post;
 import com.andrew.filosofia.user.DTO.CreateUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -41,6 +42,7 @@ public class User implements UserDetails {
     private String email;
 
     @NotNull
+    @JsonIgnore
     private String password;
 
     @NotNull

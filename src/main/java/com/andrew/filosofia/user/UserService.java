@@ -18,7 +18,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public String createUser(CreateUser createUser){
+    public User createUser(CreateUser createUser){
 
         UserRole userRole;
         if (Objects.equals(createUser.email(),admMail)) {
@@ -28,8 +28,7 @@ public class UserService {
         }
 
         User user = User.fromCreateUser(createUser, userRole);
-        userRepository.save(user);
-        return "user";
+        return userRepository.save(user);
     }
 
     public User getUser(String username) {
