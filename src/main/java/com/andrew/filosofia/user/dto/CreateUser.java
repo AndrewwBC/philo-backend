@@ -7,7 +7,7 @@ public record CreateUser (
         String username,
         @NotBlank(message = "Nome de usuário deve ser preenchido")
         String fullname,
-        @NotBlank(message = "Nome completo deve ser preenchido")
+        @NotBlank(message = "Email deve ser preenchido")
         @Email(regexp = "^[^@]+@[^@]+\\.[^@]+$" ,message = "Email inválido.")
         String email,
         @NotBlank
