@@ -1,9 +1,8 @@
 package com.andrew.filosofia.user;
 
 
-import com.andrew.filosofia.user.DTO.CreateUser;
+import com.andrew.filosofia.user.dto.CreateUser;
 import com.andrew.filosofia.user.validations.UserValidate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

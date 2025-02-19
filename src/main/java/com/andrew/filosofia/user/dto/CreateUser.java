@@ -1,4 +1,4 @@
-package com.andrew.filosofia.user.DTO;
+package com.andrew.filosofia.user.dto;
 
 import jakarta.validation.constraints.*;
 

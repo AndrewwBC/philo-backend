@@ -1,7 +1,7 @@
 package com.andrew.filosofia.user.validations;
 
 import com.andrew.filosofia.exception.exceptions.user.SignInException;
-import com.andrew.filosofia.user.DTO.CreateUser;
+import com.andrew.filosofia.user.dto.CreateUser;
 import com.andrew.filosofia.user.UserRepository;
 import org.springframework.stereotype.Component;
 

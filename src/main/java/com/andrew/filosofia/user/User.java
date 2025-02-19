@@ -1,13 +1,11 @@
 package com.andrew.filosofia.user;
 
 import com.andrew.filosofia.post.Post;
-import com.andrew.filosofia.user.DTO.CreateUser;
+import com.andrew.filosofia.user.dto.CreateUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -101,4 +99,16 @@ public class User implements UserDetails {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", userPosts=" + userPosts +
+                '}';
+    }
 }
