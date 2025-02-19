@@ -3,18 +3,16 @@ package com.andrew.filosofia.user.DTO;
 import jakarta.validation.constraints.*;
 
 public record CreateUser (
-        @NotNull
-        @NotEmpty
+        @NotBlank(message = "Nome completo deve ser preenchido")
         String username,
-        @NotNull
-        @NotEmpty
+        @NotBlank(message = "Nome de usuário deve ser preenchido")
         String fullname,
-        @Email
+        @NotBlank(message = "Nome completo deve ser preenchido")
+        @Email(regexp = "^[^@]+@[^@]+\\.[^@]+$" ,message = "Email inválido.")
         String email,
-        @NotNull
-        @NotEmpty
+        @NotBlank
         @Size(min = 8, max = 32)
-        @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d).+$\n", message = "Senha não está no formato esperado.")
+        @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d).+$", message = "Senha não está no formato esperado.")
         String password
 )
 {}

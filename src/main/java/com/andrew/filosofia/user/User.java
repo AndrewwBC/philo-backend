@@ -5,6 +5,8 @@ import com.andrew.filosofia.user.DTO.CreateUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,23 +31,22 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String id;
 
-    @NotNull
+    @NotBlank
     @Column(unique = true)
     private String fullname;
 
-    @NotNull
+    @NotBlank
     private String username;
 
-    @NotNull
+    @NotBlank
     @Email
     @Column(unique = true)
     private String email;
 
-    @NotNull
+    @NotBlank
     @JsonIgnore
     private String password;
 
-    @NotNull
     private UserRole role;
 
     @OneToMany(mappedBy = "user")
