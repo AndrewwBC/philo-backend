@@ -15,8 +15,11 @@ public class UserService {
     @Value("${ADM_MAIL}")
     private String admMail;
 
-    @Autowired
-    UserRepository userRepository;
+   private final UserRepository userRepository;
+
+   public UserService(UserRepository userRepository) {
+       this.userRepository = userRepository;
+   }
 
     public User createUser(CreateUser createUser){
 
