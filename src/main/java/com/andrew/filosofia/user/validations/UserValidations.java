@@ -1,6 +1,7 @@
 package com.andrew.filosofia.user.validations;
 
+import com.andrew.filosofia.user.DTO.CreateUser;
+
 public interface UserValidations {
-    void usernameAlreadyExists(String username);
-    void emailAlreadyExists(String email);
+    void signInValidate(CreateUser createUser);
 }
