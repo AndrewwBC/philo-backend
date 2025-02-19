@@ -2,6 +2,7 @@ package com.andrew.filosofia.user;
 
 
 import com.andrew.filosofia.user.DTO.CreateUser;
+import com.andrew.filosofia.user.validations.UserValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,13 +16,17 @@ public class UserService {
     @Value("${ADM_MAIL}")
     private String admMail;
 
+    private UserValidate userValidate;
+
    private final UserRepository userRepository;
 
-   public UserService(UserRepository userRepository) {
+   public UserService(UserRepository userRepository, UserValidate userValidate) {
+       this.userValidate = userValidate;
        this.userRepository = userRepository;
    }
 
     public User createUser(CreateUser createUser){
+        this.userValidate.signInValidate(createUser);
 
         UserRole userRole;
         if (Objects.equals(createUser.email(),admMail)) {
