@@ -1,4 +1,17 @@
 package com.andrew.filosofia.user.validations;
 
-public class UserValidate {
+import com.andrew.filosofia.user.User;
+
+public class UserValidate implements UserValidations {
+
+    @Override
+    public void usernameAlreadyExists(String username) {
+    }
+    @Override
+    public void emailAlreadyExists(String email) {
+
+    }
+
+    public void validate() {
+    }
 }
