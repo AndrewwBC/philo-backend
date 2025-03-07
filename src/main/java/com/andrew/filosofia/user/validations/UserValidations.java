@@ -5,5 +5,5 @@ import com.andrew.filosofia.user.dto.UserDTO;
 
 public interface UserValidations {
     void signInValidate(UserDTO userDTO);
-    void updateValidate(UserDTO userDTO);
+    void updateValidate(UserDTO userDTO, String id);
 }

@@ -38,7 +38,7 @@ public class UserValidate implements UserValidations {
     }
 
     @Override
-    public void updateValidate(UserDTO userDTO) {
+    public void updateValidate(UserDTO userDTO, String id) {
 
 
 
