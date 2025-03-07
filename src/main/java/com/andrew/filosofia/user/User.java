@@ -74,6 +74,14 @@ public class User implements UserDetails {
         );
     }
 
+    public void updateFromUserDTO(UserDTO userDTO, UserRole userRole){
+        this.username = userDTO.username();
+        this.fullname = userDTO.fullname();
+        this.email = userDTO.email();
+        this.password = userDTO.password();
+        this.role = userRole;
+    }
+
     @Override
     public String getUsername() {
         return username;

@@ -22,7 +22,7 @@ public class UserService {
        this.userRepository = userRepository;
     }
 
-    public User createUser(UserDTO userDTO){
+    public User createUser(UserDTO userDTO) {
         this.userValidate.signInValidate(userDTO);
 
         UserRole userRole = this.handleUserRole(userDTO.email());
@@ -31,7 +31,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User updateUser(UserDTO userDTO) {
 
+        UserRole userRole = this.handleUserRole(userDTO.email());
+
+        User user = this.userRepository.findByUsername(userDTO.username()).orElseThrow(() ->
+            new NoSuchElementException("Usuário não encontrado"));
+
+        user.updateFromUserDTO(userDTO, userRole);
+
+        return this.userRepository.save(user);
+    }
 
     public User getUser(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() ->
