@@ -8,10 +8,9 @@ import java.util.List;
 
 
 @ControllerAdvice
-public class SignInException extends ValidationException {
+public class ValidateException extends ValidationException {
     private final List<UserValidateResponse> customMessage;
-
-    public SignInException(List<UserValidateResponse> customMessage){
+    public ValidateException(List<UserValidateResponse> customMessage){
         this.customMessage = customMessage;
     }
     public List<UserValidateResponse> getCustomMessage(){

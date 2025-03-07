@@ -1,6 +1,6 @@
 package com.andrew.filosofia.user.validations;
 
-import com.andrew.filosofia.exception.exceptions.user.SignInException;
+import com.andrew.filosofia.exception.exceptions.user.ValidateException;
 import com.andrew.filosofia.user.dto.UserDTO;
 import com.andrew.filosofia.user.UserRepository;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class UserValidate implements UserValidations {
         }
 
         if(!userValidateResponse.isEmpty()) {
-            throw new SignInException(userValidateResponse);
+            throw new ValidateException(userValidateResponse);
         }
     }
 

@@ -15,8 +15,8 @@ import java.util.Map;
 public class Handler {
 
     @ExceptionHandler
-    public ResponseEntity<List<UserValidateResponse>> handleSignInException(SignInException signInException){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(signInException.getCustomMessage());
+    public ResponseEntity<List<UserValidateResponse>> handleSignInException(ValidateException validateException){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validateException.getCustomMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
