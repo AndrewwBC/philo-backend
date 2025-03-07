@@ -14,6 +14,7 @@ import java.util.Objects;
 @Component
 public class UserValidate implements UserValidations {
     private final UserRepository userRepository;
+    List<UserValidateResponse> userValidateResponse = new ArrayList<>();
     public UserValidate(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -23,20 +24,16 @@ public class UserValidate implements UserValidations {
         boolean emailExists = userRepository.existsByEmail(userDTO.email());
         boolean usernameExists = userRepository.existsByUsername(userDTO.username());
 
-        List<UserValidateResponse> userValidateResponse = new ArrayList<>();
-
         if(emailExists) {
-            userValidateResponse.add(
-                    UserValidateResponse.fromData("email", "Email already exists."));
+            this.handleUserValidateResponse("email", "Email already exists123.");
         }
 
         if(usernameExists){
-            userValidateResponse.add(
-                    UserValidateResponse.fromData("username", "Username already exists."));
+           this.handleUserValidateResponse("username", "Username already exists.");
         }
 
-        if(!userValidateResponse.isEmpty()) {
-            throw new ValidateException(userValidateResponse);
+        if(!this.userValidateResponse.isEmpty()) {
+            throw new ValidateException(this.userValidateResponse);
         }
     }
 
@@ -60,6 +57,10 @@ public class UserValidate implements UserValidations {
             boolean newEmailAlreadyExists = this.userRepository.existsByEmail(newEmail);
         }
 
+    }
+
+    private void handleUserValidateResponse(String fieldName, String message){
+        this.userValidateResponse.add(UserValidateResponse.fromData(fieldName, message));
     }
 
 }
