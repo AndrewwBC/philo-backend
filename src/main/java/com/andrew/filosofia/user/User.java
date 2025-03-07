@@ -30,7 +30,6 @@ public class User implements UserDetails {
     private String id;
 
     @NotBlank
-    @Column(unique = true)
     private String fullname;
 
     @NotBlank

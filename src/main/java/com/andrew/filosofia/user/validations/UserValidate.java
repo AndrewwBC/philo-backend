@@ -14,31 +14,32 @@ import java.util.Objects;
 @Component
 public class UserValidate implements UserValidations {
     private final UserRepository userRepository;
-    List<UserValidateResponse> userValidateResponse = new ArrayList<>();
+    List<UserExceptionsResponse> userValidateExceptions = new ArrayList<>();
     public UserValidate(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public void signInValidate(UserDTO userDTO) {
+        this.userValidateExceptions.clear();
+
         boolean emailExists = userRepository.existsByEmail(userDTO.email());
         boolean usernameExists = userRepository.existsByUsername(userDTO.username());
 
         if(emailExists) {
-            this.handleUserValidateResponse("email");
+            this.addExceptionMessageInUserValidateExceptionList("email");
         }
 
         if(usernameExists){
-           this.handleUserValidateResponse("username");
+           this.addExceptionMessageInUserValidateExceptionList("username");
         }
 
-        if(!this.userValidateResponse.isEmpty()) {
-            throw new ValidateException(this.userValidateResponse);
-        }
+        this.throwErrorIfListIsNotEmpty();
     }
 
     @Override
     public void updateValidate(UserDTO userDTO, String id) {
+        this.userValidateExceptions.clear();
 
         User user = this.userRepository.findById(id).orElseThrow(() ->
                 new NoSuchElementException("User not found!"));
@@ -51,20 +52,30 @@ public class UserValidate implements UserValidations {
 
         if(!Objects.equals(oldUsername, newUsername)) {
             boolean newUsernameAlreadyExists = this.userRepository.existsByUsername(newUsername);
-            this.handleUserValidateResponse("username");
+            if(newUsernameAlreadyExists){
+                this.addExceptionMessageInUserValidateExceptionList("username");
+            }
         }
 
         if(!Objects.equals(oldEmail, newEmail)) {
             boolean newEmailAlreadyExists = this.userRepository.existsByEmail(newEmail);
+            if(newEmailAlreadyExists){
+                this.addExceptionMessageInUserValidateExceptionList("email");
+            }
         }
 
+        this.throwErrorIfListIsNotEmpty();
     }
 
-    private void handleUserValidateResponse(String fieldName){
-
+    private void addExceptionMessageInUserValidateExceptionList(String fieldName){
         String message = Objects.equals(fieldName, "username") ? "Username already exists!" : "Email already exists";
+        this.userValidateExceptions.add(UserExceptionsResponse.fromData(fieldName, message));
+    }
 
-        this.userValidateResponse.add(UserValidateResponse.fromData(fieldName, message));
+    private void throwErrorIfListIsNotEmpty(){
+        if(!this.userValidateExceptions.isEmpty()) {
+            throw new ValidateException(this.userValidateExceptions);
+        }
     }
 
 }

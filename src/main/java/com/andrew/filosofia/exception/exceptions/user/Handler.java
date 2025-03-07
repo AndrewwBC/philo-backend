@@ -1,6 +1,6 @@
 package com.andrew.filosofia.exception.exceptions.user;
 
-import com.andrew.filosofia.user.validations.UserValidateResponse;
+import com.andrew.filosofia.user.validations.UserExceptionsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class Handler {
 
     @ExceptionHandler
-    public ResponseEntity<List<UserValidateResponse>> handleSignInException(ValidateException validateException){
+    public ResponseEntity<List<UserExceptionsResponse>> handleSignInException(ValidateException validateException){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validateException.getCustomMessage());
     }
 

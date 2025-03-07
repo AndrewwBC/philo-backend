@@ -1,6 +1,6 @@
 package com.andrew.filosofia.exception.exceptions.user;
 
-import com.andrew.filosofia.user.validations.UserValidateResponse;
+import com.andrew.filosofia.user.validations.UserExceptionsResponse;
 import jakarta.validation.ValidationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
@@ -9,11 +9,11 @@ import java.util.List;
 
 @ControllerAdvice
 public class ValidateException extends ValidationException {
-    private final List<UserValidateResponse> customMessage;
-    public ValidateException(List<UserValidateResponse> customMessage){
+    private final List<UserExceptionsResponse> customMessage;
+    public ValidateException(List<UserExceptionsResponse> customMessage){
         this.customMessage = customMessage;
     }
-    public List<UserValidateResponse> getCustomMessage(){
+    public List<UserExceptionsResponse> getCustomMessage(){
         return this.customMessage;
     }
 }
