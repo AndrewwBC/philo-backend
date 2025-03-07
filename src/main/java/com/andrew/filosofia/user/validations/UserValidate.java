@@ -36,4 +36,9 @@ public class UserValidate implements UserValidations {
             throw new SignInException(userValidateResponse);
         }
     }
+
+    @Override
+    public void updateValidate(UserDTO userDTO) {
+    }
+
 }
