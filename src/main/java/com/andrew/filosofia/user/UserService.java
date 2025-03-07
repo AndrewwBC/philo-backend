@@ -32,6 +32,7 @@ public class UserService {
     }
 
     public User updateUser(UserDTO userDTO, String id) {
+        this.userValidate.updateValidate(userDTO, id);
 
         UserRole userRole = this.handleUserRole(userDTO.email());
 

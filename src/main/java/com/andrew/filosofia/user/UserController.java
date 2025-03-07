@@ -20,13 +20,12 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDTO userDTO){
         return ResponseEntity.status(HttpStatus.OK).body(userService.createUser(userDTO));
     }
-
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody @Valid UserDTO userDTO, @RequestParam String id){
+        System.out.println(id);
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(userDTO, id));
     }
-
-    @GetMapping
+    @GetMapping("/{username}")
     public ResponseEntity<?> getUser(@PathVariable String username){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(username));
     }
