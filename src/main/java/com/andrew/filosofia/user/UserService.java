@@ -25,22 +25,23 @@ public class UserService {
     public User createUser(UserDTO userDTO){
         this.userValidate.signInValidate(userDTO);
 
-        UserRole userRole;
-        if (Objects.equals(userDTO.email(),admMail)) {
-            userRole = UserRole.ADMIN;
-        } else {
-            userRole = UserRole.USER;
-        }
+        UserRole userRole = this.handleUserRole(userDTO.email());
 
         User user = User.fromCreateUser(userDTO, userRole);
         return userRepository.save(user);
     }
+
+
 
     public User getUser(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() ->
                 new NoSuchElementException(("Usuário não encontrado.")));
 
         return user;
+    }
+
+    private UserRole handleUserRole(String email){
+        return Objects.equals(email, admMail) ? UserRole.ADMIN : UserRole.USER;
     }
 
 }
