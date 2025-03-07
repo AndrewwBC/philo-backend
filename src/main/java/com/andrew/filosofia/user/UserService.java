@@ -31,7 +31,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(UserDTO userDTO) {
+    public User updateUser(UserDTO userDTO, String id) {
 
         UserRole userRole = this.handleUserRole(userDTO.email());
 
