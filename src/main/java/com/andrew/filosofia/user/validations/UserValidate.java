@@ -25,11 +25,11 @@ public class UserValidate implements UserValidations {
         boolean usernameExists = userRepository.existsByUsername(userDTO.username());
 
         if(emailExists) {
-            this.handleUserValidateResponse("email", "Email already exists123.");
+            this.handleUserValidateResponse("email");
         }
 
         if(usernameExists){
-           this.handleUserValidateResponse("username", "Username already exists.");
+           this.handleUserValidateResponse("username");
         }
 
         if(!this.userValidateResponse.isEmpty()) {
@@ -41,7 +41,7 @@ public class UserValidate implements UserValidations {
     public void updateValidate(UserDTO userDTO, String id) {
 
         User user = this.userRepository.findById(id).orElseThrow(() ->
-                new NoSuchElementException("Usuário não encontrado!"));
+                new NoSuchElementException("User not found!"));
 
         String oldUsername = user.getUsername();
         String oldEmail = user.getEmail();
@@ -51,6 +51,7 @@ public class UserValidate implements UserValidations {
 
         if(!Objects.equals(oldUsername, newUsername)) {
             boolean newUsernameAlreadyExists = this.userRepository.existsByUsername(newUsername);
+            this.handleUserValidateResponse("username");
         }
 
         if(!Objects.equals(oldEmail, newEmail)) {
@@ -59,7 +60,10 @@ public class UserValidate implements UserValidations {
 
     }
 
-    private void handleUserValidateResponse(String fieldName, String message){
+    private void handleUserValidateResponse(String fieldName){
+
+        String message = Objects.equals(fieldName, "username") ? "Username already exists!" : "Email already exists";
+
         this.userValidateResponse.add(UserValidateResponse.fromData(fieldName, message));
     }
 
