@@ -14,15 +14,13 @@ public class UserService {
 
     @Value("${ADM_MAIL}")
     private String admMail;
-
     private UserValidate userValidate;
+    private final UserRepository userRepository;
 
-   private final UserRepository userRepository;
-
-   public UserService(UserRepository userRepository, UserValidate userValidate) {
+    public UserService(UserRepository userRepository, UserValidate userValidate) {
        this.userValidate = userValidate;
        this.userRepository = userRepository;
-   }
+    }
 
     public User createUser(UserDTO userDTO){
         this.userValidate.signInValidate(userDTO);
