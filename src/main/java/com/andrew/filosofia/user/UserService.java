@@ -1,7 +1,7 @@
 package com.andrew.filosofia.user;
 
 
-import com.andrew.filosofia.user.dto.CreateUser;
+import com.andrew.filosofia.user.dto.UserDTO;
 import com.andrew.filosofia.user.validations.UserValidate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,17 +24,17 @@ public class UserService {
        this.userRepository = userRepository;
    }
 
-    public User createUser(CreateUser createUser){
-        this.userValidate.signInValidate(createUser);
+    public User createUser(UserDTO userDTO){
+        this.userValidate.signInValidate(userDTO);
 
         UserRole userRole;
-        if (Objects.equals(createUser.email(),admMail)) {
+        if (Objects.equals(userDTO.email(),admMail)) {
             userRole = UserRole.ADMIN;
         } else {
             userRole = UserRole.USER;
         }
 
-        User user = User.fromCreateUser(createUser, userRole);
+        User user = User.fromCreateUser(userDTO, userRole);
         return userRepository.save(user);
     }
 

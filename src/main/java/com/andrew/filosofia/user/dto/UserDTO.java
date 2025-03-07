@@ -2,7 +2,7 @@ package com.andrew.filosofia.user.dto;
 
 import jakarta.validation.constraints.*;
 
-public record CreateUser (
+public record UserDTO(
         @NotBlank(message = "Nome completo deve ser preenchido")
         String username,
         @NotBlank(message = "Nome de usuário deve ser preenchido")

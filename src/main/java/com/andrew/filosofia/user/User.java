@@ -1,7 +1,7 @@
 package com.andrew.filosofia.user;
 
 import com.andrew.filosofia.post.Post;
-import com.andrew.filosofia.user.dto.CreateUser;
+import com.andrew.filosofia.user.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -64,12 +64,12 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public static User fromCreateUser(CreateUser createUser, UserRole role) {
+    public static User fromCreateUser(UserDTO userDTO, UserRole role) {
         return new User(
-                createUser.username(),
-                createUser.fullname(),
-                createUser.email(),
-                createUser.password(),
+                userDTO.username(),
+                userDTO.fullname(),
+                userDTO.email(),
+                userDTO.password(),
                 role
         );
     }

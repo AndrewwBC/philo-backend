@@ -1,7 +1,7 @@
 package com.andrew.filosofia.user.validations;
 
 import com.andrew.filosofia.exception.exceptions.user.SignInException;
-import com.andrew.filosofia.user.dto.CreateUser;
+import com.andrew.filosofia.user.dto.UserDTO;
 import com.andrew.filosofia.user.UserRepository;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +16,9 @@ public class UserValidate implements UserValidations {
     }
 
     @Override
-    public void signInValidate(CreateUser createUser) {
-        boolean emailExists = userRepository.existsByEmail(createUser.email());
-        boolean usernameExists = userRepository.existsByUsername(createUser.username());
+    public void signInValidate(UserDTO userDTO) {
+        boolean emailExists = userRepository.existsByEmail(userDTO.email());
+        boolean usernameExists = userRepository.existsByUsername(userDTO.username());
 
         List<UserValidateResponse> userValidateResponse = new ArrayList<>();
 

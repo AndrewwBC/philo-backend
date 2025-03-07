@@ -1,7 +1,7 @@
 package com.andrew.filosofia.user.validations;
 
-import com.andrew.filosofia.user.dto.CreateUser;
+import com.andrew.filosofia.user.dto.UserDTO;
 
 public interface UserValidations {
-    void signInValidate(CreateUser createUser);
+    void signInValidate(UserDTO userDTO);
 }
