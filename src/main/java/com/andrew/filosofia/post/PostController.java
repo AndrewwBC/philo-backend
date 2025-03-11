@@ -13,5 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/post")
 public class PostController {
 
+    PostService postService;
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
+    @PostMapping()
+    public ResponseEntity<Post> createPost(@RequestBody @Valid PostDTO postDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.postService.createPost(postDTO));
+    }
 
 }
