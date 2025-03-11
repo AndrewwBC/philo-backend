@@ -6,7 +6,9 @@ import com.andrew.filosofia.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,6 +19,8 @@ import java.util.UUID;
 
 @Entity(name = "Posts")
 @Table(name = "posts")
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Post {
 
@@ -31,6 +35,8 @@ public class Post {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
+
+
 
     @ManyToMany
     @JoinTable(name = "post_categories",

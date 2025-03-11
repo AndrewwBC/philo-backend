@@ -6,4 +6,5 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
+
 }
