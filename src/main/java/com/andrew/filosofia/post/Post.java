@@ -2,6 +2,7 @@ package com.andrew.filosofia.post;
 
 
 import com.andrew.filosofia.categorie.Categorie;
+import com.andrew.filosofia.post.dto.PostDTO;
 import com.andrew.filosofia.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,8 +20,6 @@ import java.util.UUID;
 
 @Entity(name = "Posts")
 @Table(name = "posts")
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Post {
 
@@ -36,7 +35,15 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+    public Post(String content, LocalDateTime creationDate, User user){
+        this.content = content;
+        this.creationDate = creationDate;
+        this.user = user;
+    }
 
+    public static Post fromDTO(PostDTO postDTO, User user){
+        return new Post(postDTO.content(), postDTO.creationDate(), user);
+    }
 
     @ManyToMany
     @JoinTable(name = "post_categories",
