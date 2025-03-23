@@ -1,15 +1,12 @@
 package com.andrew.filosofia.post;
 
-
 import com.andrew.filosofia.categorie.Categorie;
 import com.andrew.filosofia.post.dto.PostDTO;
 import com.andrew.filosofia.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -40,7 +37,7 @@ public class Post {
         this.creationDate = creationDate;
         this.user = user;
     }
-
+    public Post() {}
     public static Post fromDTO(PostDTO postDTO, User user){
         return new Post(postDTO.content(), postDTO.creationDate(), user);
     }
