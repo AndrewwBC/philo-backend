@@ -19,10 +19,11 @@ public class AuthService {
         this.tokenService = tokenService;
         this.userRepository = userRepository;
     }
-    public String signin(SignInDTO signInDTO) {
+    public String signIn(SignInDTO signInDTO) {
         var usernamePass = new UsernamePasswordAuthenticationToken(signInDTO.email(), signInDTO.password());
+        System.out.println(usernamePass);
         var auth = this.authManager.authenticate(usernamePass);
-
+        System.out.println(auth);
         return this.tokenService.generateToken((User) auth.getPrincipal());
     }
 

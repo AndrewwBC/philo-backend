@@ -60,7 +60,7 @@ public class User implements UserDetails {
         this.fullname = fullname;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = userRole;
     }
 
     public static User fromCreateUser(UserDTO userDTO, UserRole role) {
