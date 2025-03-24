@@ -18,7 +18,6 @@ public class AuthController {
     }
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody @Valid SignInDTO signInDTO){
-        System.out.println(signInDTO);
         return ResponseEntity.status(HttpStatus.OK).body(this.authService.signIn(signInDTO));
     }
 

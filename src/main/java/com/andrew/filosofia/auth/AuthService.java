@@ -10,21 +10,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-    private final UserRepository userRepository;
     private final AuthenticationManager authManager;
     private final TokenService tokenService;
 
-    public AuthService(AuthenticationManager authManager,TokenService tokenService,UserRepository userRepository) {
+    public AuthService(AuthenticationManager authManager,TokenService tokenService) {
         this.authManager = authManager;
         this.tokenService = tokenService;
-        this.userRepository = userRepository;
     }
     public String signIn(SignInDTO signInDTO) {
         var usernamePass = new UsernamePasswordAuthenticationToken(signInDTO.email(), signInDTO.password());
-        System.out.println(usernamePass);
         var auth = this.authManager.authenticate(usernamePass);
-        System.out.println(auth);
         return this.tokenService.generateToken((User) auth.getPrincipal());
     }
-
 }

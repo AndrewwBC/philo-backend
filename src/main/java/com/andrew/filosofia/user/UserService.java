@@ -32,7 +32,6 @@ public class UserService {
 
         String cryptPass = new BCryptPasswordEncoder().encode(userDTO.password());
 
-
         User user = User.fromCreateUser(userDTO, cryptPass, userRole);
         return userRepository.save(user);
     }
