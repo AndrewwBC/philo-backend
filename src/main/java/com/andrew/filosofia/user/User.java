@@ -63,13 +63,13 @@ public class User implements UserDetails {
         this.role = userRole;
     }
 
-    public static User fromCreateUser(UserDTO userDTO, UserRole role) {
+    public static User fromCreateUser(UserDTO userDTO, String cryptPass, UserRole userRole) {
         return new User(
                 userDTO.username(),
                 userDTO.fullname(),
                 userDTO.email(),
-                userDTO.password(),
-                role
+                cryptPass,
+                userRole
         );
     }
 

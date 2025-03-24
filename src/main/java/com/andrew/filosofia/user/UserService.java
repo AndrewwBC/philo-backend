@@ -4,6 +4,8 @@ package com.andrew.filosofia.user;
 import com.andrew.filosofia.user.dto.UserDTO;
 import com.andrew.filosofia.user.validations.UserValidate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -26,8 +28,12 @@ public class UserService {
         this.userValidate.signInValidate(userDTO);
 
         UserRole userRole = this.handleUserRole(userDTO.email());
+        System.out.println(userRole);
 
-        User user = User.fromCreateUser(userDTO, userRole);
+        String cryptPass = new BCryptPasswordEncoder().encode(userDTO.password());
+
+
+        User user = User.fromCreateUser(userDTO, cryptPass, userRole);
         return userRepository.save(user);
     }
 
@@ -52,7 +58,10 @@ public class UserService {
     }
 
     private UserRole handleUserRole(String email){
-        return Objects.equals(email, admMail) ? UserRole.ADMIN : UserRole.USER;
+
+        UserRole userRole = Objects.equals(email, admMail) ? UserRole.ADMIN : UserRole.USER;
+
+        return userRole;
     }
 
 }
