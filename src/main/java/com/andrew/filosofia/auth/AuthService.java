@@ -8,6 +8,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class AuthService {
     private final AuthenticationManager authManager;
@@ -17,9 +20,14 @@ public class AuthService {
         this.authManager = authManager;
         this.tokenService = tokenService;
     }
-    public String signIn(SignInDTO signInDTO) {
+    public Map<String, String> signIn(SignInDTO signInDTO) {
         var usernamePass = new UsernamePasswordAuthenticationToken(signInDTO.email(), signInDTO.password());
         var auth = this.authManager.authenticate(usernamePass);
-        return this.tokenService.generateToken((User) auth.getPrincipal());
+        String token = this.tokenService.generateToken((User) auth.getPrincipal());
+
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+
+        return response;
     }
 }

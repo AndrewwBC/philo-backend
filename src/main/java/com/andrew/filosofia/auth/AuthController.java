@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
@@ -17,7 +19,7 @@ public class AuthController {
         this.authService = authService;
     }
     @PostMapping("/signin")
-    public ResponseEntity<String> signIn(@RequestBody @Valid SignInDTO signInDTO){
+    public ResponseEntity<Map<String, String>> signIn(@RequestBody @Valid SignInDTO signInDTO){
         return ResponseEntity.status(HttpStatus.OK).body(this.authService.signIn(signInDTO));
     }
 
