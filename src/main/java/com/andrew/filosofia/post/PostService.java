@@ -4,7 +4,6 @@ import com.andrew.filosofia.post.dto.PostDTO;
 import com.andrew.filosofia.user.User;
 import com.andrew.filosofia.user.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.NoSuchElementException;
 
 @Service
