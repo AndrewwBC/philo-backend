@@ -5,8 +5,6 @@ import java.util.UUID;
 
 public record PostDTO (
         String content,
-        LocalDateTime creationDate,
         String userId
-
 )
 {}

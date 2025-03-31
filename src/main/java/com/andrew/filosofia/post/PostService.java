@@ -19,7 +19,7 @@ public class PostService {
         User user = this.userRepository.findById(postDTO.userId()).orElseThrow(()
                 -> new NoSuchElementException("User not found"));
 
-        return Post.fromDTO(postDTO, user);
+        return this.postRepository.save(Post.fromDTO(postDTO, user));
     }
 
 }
